@@ -6,7 +6,8 @@
     "dev": "tinacms dev -c \"astro dev\"",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@tinacms/cli": "^1.5.11",

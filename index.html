@@ -114,20 +114,17 @@
   ];
   const shuffledCaptionList = shuffleArray(captionList);
   const caption = document.getElementById("caption");
-  let interval;
+
+  let timeout;
   let count = 0;
-  // new caption ever some seconds
-  function runLoop() {
-    clearTimeout(interval);
-    interval = setTimeout(function tick() {
-      count = (count + 1) % shuffledCaptionList.length;
 
-      caption.innerText = shuffledCaptionList[count];
+  // new caption every some seconds
+  timeout = setTimeout(function tick() {
+    count = (count + 1) % shuffledCaptionList.length; // loop thru array
+    caption.innerText = shuffledCaptionList[count];
 
-      setTimeout(tick, 5000);
-    }, 2500);
-  }
-  runLoop();
+    timeout = setTimeout(tick, 5000);
+  }, 2500);
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

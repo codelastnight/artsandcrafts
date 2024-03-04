@@ -14,6 +14,9 @@ dependencies:
   astro:
     specifier: ^4.4.9
     version: 4.4.9
+  pnpm:
+    specifier: ^8.15.4
+    version: 8.15.4
   sharp:
     specifier: ^0.33.2
     version: 0.33.2
@@ -3114,6 +3117,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: false
+
+  /pnpm@8.15.4:
+    resolution: {integrity: sha512-C9Opvp6w6aaSZ23uwAowO6IYuiedmSQUdWFrOY267t0RFG+SwoQ0WPVXsdEn4J1MFx4QW9zWthACs5aFqAFrng==}
+    engines: {node: '>=16.14'}
+    hasBin: true
     dev: false
 
   /postcss-import@15.1.0(postcss@8.4.35):

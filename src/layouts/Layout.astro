@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style is:global lang="postcss">
+		@font-face {
+			font-family: "Archivo Narrow";
+			src: local("Archivo Narrow"), 
+			url("/ArchivoNarrow-Medium.woff2");
+			font-display: swap;
+	  }
+		:root {
+			--color-fg: #001AFF;
+			--color-bg: #F6F6F6;
+		}
+		html {
+			@apply font-sans bg-bg text-fg;
+			font-optical-sizing: auto;
+		}
+	
+	</style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

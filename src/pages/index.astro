@@ -1,0 +1,78 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FunnyCaptions from "../components/FunnyCaptions.astro";
+import { getCollection } from "astro:content";
+const memberEntries = await getCollection("members", ({ data }) => {
+  return data.hidden !== true;
+});
+function getFirstLink(links: { [key: string]: string }) {
+  if (Object.entries(links).length > 0) return Object.entries(links)[0][1];
+}
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <section class="hero py-1">
+      <div class="col-span-2">
+        <h1 class="logo">
+          Studio <br class="lg:hidden" /> Arts+<br class="lg:hidden" />Crafts<br
+            class="lg:hidden"
+          />©
+        </h1>
+        <FunnyCaptions />
+      </div>
+      <div class="grid grid-cols-2 h-fit w-full leading-tight mt-24 lg:mt-2">
+        <h2 class="">Instagram</h2>
+        <p>
+          <a
+            href="https://www.instagram.com/studio.artsandcrafts/"
+            target="_blank"
+            class="link"
+          >
+            studio.artsandcrafts
+          </a>
+        </p>
+        <h>Email</h>
+        <p>
+          <a href="mailto:hello@artsandcrafts.work" class="link">
+            hello@artsandcrafts.work
+          </a>
+        </p>
+        <h2 class="mt-[1em]">Members</h2>
+        <p class="mt-[1em]">
+          {
+            memberEntries.map((member, index) => (
+              <>
+                <a
+                  href={getFirstLink(member.data.links)}
+                  target="_blank"
+                  referrerpolicy="no-referrer"
+                  class="whitespace-nowrap link"
+                >
+                  {member.data.name}
+                </a>
+                {index < memberEntries.length - 1 ? " / " : ""}
+              </>
+            ))
+          }
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <style lang="postcss">
+	section {
+		@apply px-3 md:px-4;
+	}
+	.hero {
+		@apply mb-[60svh]  lg:grid lg:grid-cols-3 gap-2;
+	}
+	.logo {
+		@apply text-[20vmin] md:text-[14vmin];
+		@apply leading-[0.86] ;
+	}
+	:global(.link) {
+        @apply underline hover:text-bg hover:bg-fg w-fit decoration-[0.5px] decoration-[#707DF6] underline-offset-2;
+    }
+</style>
+</Layout>

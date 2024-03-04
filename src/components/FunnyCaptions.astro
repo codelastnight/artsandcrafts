@@ -1,0 +1,65 @@
+<p id="funny-caption">a design collective</p>
+<script>
+  const captionList = [
+    "creating a more “perfect” world",
+    "Designing your past, present, and future",
+    "Look towards the sunrise, ephemeral relaxation",
+    "YESTERDAY DESIGN TOMORROW",
+    "MY QUIET LIFE AS A DESIGNER(btw designer) IN ANOTHER WORLD",
+    "DESIGN PERFECT BEING UNDER FREEDOM",
+    "A DESIGN PLAYGROUND",
+    "THE EVERLASTING FLAME, CRADLE THE EARTH",
+    "MICHEAL JACKSONS KIDS DONT LOOK LIKE HIM AT ALL",
+    "I LOVE CARLY RAE JEPSON",
+    "NATURE’S BOUNTY: LIVE FAST DIE YOUNG",
+    "S(LOGAN)",
+    "SHOUTOUT BRAZIL",
+    "NATURE CALLS, TOWARDS YOU",
+    "chili’s baby back ribs",
+    "IM REALLY HUNGRY BUY ME FOOD",
+    "EAT PANT",
+    "AMBIGUITY IS ETERNAL FREEDOM",
+    "GRANULATED OPTIC WIZARDS",
+    "EMBRACE ME IM LONELY",
+    "WHAT DOES WIFI STAND FOR",
+    "NATURE’S EMBRACE: FREE THOUGHT IN AN ENDLESS VACUUM",
+    "crafting a more eternal EARTH",
+    "i am the 9th wonder of the world (The 8th being babytron)",
+    "i CANNOT COUNT PAST 6",
+    "echo 2000",
+    "BABYTRON’S ANGELS |limit| ETHEREAL BREAK",
+    "KNIFEE",
+    "Richard Owens’ arms length boots ($2000 no low balling)",
+    "Impenetrable space, innumerable thoughts",
+    "apostles of the earth;",
+  ];
+  const shuffledCaptionList = shuffleArray(captionList);
+  const caption = document.getElementById(
+    "funny-caption"
+  ) as HTMLParagraphElement;
+
+  let timeout;
+  let count = 0;
+
+  // new caption every some seconds
+  timeout = setTimeout(function tick() {
+    count = (count + 1) % shuffledCaptionList.length; // loop thru array
+    caption.innerText = shuffledCaptionList[count];
+
+    timeout = setTimeout(tick, 5000);
+  }, 2500);
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  //advert
+  const style = "color: blue; font-size:24px;";
+  console.clear();
+  console.info("%c follow us on instagram @studio.artsandcrafts <3", style);
+  console.info("%c github: https://github.com/studioartsandcrafts", style);
+</script>

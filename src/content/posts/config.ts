@@ -46,10 +46,9 @@ const members = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
-      archive: z.boolean().default(false),
+      hidden: z.boolean().default(false),
       name: z.string(),
       links: z.record(z.string(), z.string()),
-      type: z.array(z.enum(["artist", "producer", "visual"])),
     }),
 });
 

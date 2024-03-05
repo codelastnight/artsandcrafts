@@ -1,27 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import FunnyCaptions from "../components/FunnyCaptions.astro";
-import { getCollection } from "astro:content";
-const memberEntries = await getCollection("members", ({ data }) => {
-  return data.hidden !== true;
-});
+import { getCollection, type CollectionEntry } from "astro:content";
+const memberEntries = (
+  await getCollection("members", ({ data }) => {
+    return data.hidden !== true;
+  })
+).sort(sortByType);
+
 function getFirstLink(links: { [key: string]: string }) {
   if (Object.entries(links).length > 0) return Object.entries(links)[0][1];
+}
+
+function sortByType(
+  a: CollectionEntry<"members">,
+  b: CollectionEntry<"members">
+) {
+  if (a.data.core < b.data.core) return 1;
+  if (a.data.core > b.data.core) return -1;
+  return 0;
 }
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
     <section class="hero py-1">
-      <div class="col-span-2">
-        <h1 class="logo">
+      <div class="col-span-2 grid grid-cols-2">
+        <h1 class="logo col-span-2">
           Studio <br class="lg:hidden" /> Arts+<br class="lg:hidden" />Crafts<br
             class="lg:hidden"
           />©
         </h1>
+        <p>a cross-disciplinary collective</p>
         <FunnyCaptions />
       </div>
-      <div class="grid grid-cols-2 h-fit w-full leading-tight mt-24 lg:mt-2">
+      <div class="info">
         <h2 class="">Instagram</h2>
         <p>
           <a
@@ -38,7 +51,7 @@ function getFirstLink(links: { [key: string]: string }) {
             hello@artsandcrafts.work
           </a>
         </p>
-        <h2 class="mt-[1em]">Members</h2>
+        <h2 class="mt-[1em]">Collaborators</h2>
         <p class="mt-[1em]">
           {
             memberEntries.map((member, index) => (
@@ -62,7 +75,7 @@ function getFirstLink(links: { [key: string]: string }) {
 
   <style lang="postcss">
 	section {
-		@apply px-3 md:px-4;
+		@apply px-2 md:px-4;
 	}
 	.hero {
 		@apply mb-[60svh]  lg:grid lg:grid-cols-3 gap-2;
@@ -71,6 +84,12 @@ function getFirstLink(links: { [key: string]: string }) {
 		@apply text-[20vmin] md:text-[14vmin];
 		@apply leading-[0.86] ;
 	}
+  .info {
+   @apply grid grid-cols-2 h-fit w-full leading-tight mt-24 lg:mt-2;
+  }
+  .info p {
+    @apply bg-bg z-10;
+  }
 	:global(.link) {
         @apply underline hover:text-bg hover:bg-fg w-fit decoration-[0.5px] decoration-[#707DF6] underline-offset-2;
     }

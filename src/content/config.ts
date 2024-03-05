@@ -49,6 +49,7 @@ const members = defineCollection({
       hidden: z.boolean().default(false),
       name: z.string(),
       links: z.record(z.string(), z.string()),
+      core: z.boolean().default(false),
     }),
 });
 

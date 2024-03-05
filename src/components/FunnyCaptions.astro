@@ -1,4 +1,10 @@
-<p id="funny-caption">a design collective</p>
+<div class="lg:relative px-1 lg:px-0">
+  <p
+    id="funny-caption"
+    class="lg:w-auto absolute top-0 lg:left-0 pointer-events-none pr-1 -z-1 text-justify"
+  >
+  </p>
+</div>
 <script>
   const captionList = [
     "creating a more “perfect” world",
@@ -34,22 +40,33 @@
     "apostles of the earth;",
   ];
   const shuffledCaptionList = shuffleArray(captionList);
-  const caption = document.getElementById(
+  const captionElement = document.getElementById(
     "funny-caption"
   ) as HTMLParagraphElement;
 
   let timeout;
   let count = 0;
 
+  shuffledCaptionList.forEach((caption) => {
+    const span = document.createElement("span");
+    span.innerText = caption;
+    captionElement.appendChild(span);
+  });
+
   // new caption every some seconds
   timeout = setTimeout(function tick() {
-    count = (count + 1) % shuffledCaptionList.length; // loop thru array
-    caption.innerText = shuffledCaptionList[count];
+    // count = (count + 1) % shuffledCaptionList.length; // loop thru array
+    count = Math.floor(Math.random() * shuffledCaptionList.length);
+    const prevActive = captionElement.getElementsByClassName("active");
+    Array.from(prevActive).forEach((prevActiveElement) => {
+      prevActiveElement.classList.remove("active");
+    });
+    const newActive = captionElement.childNodes[count] as HTMLSpanElement;
+    newActive.classList.add("active");
+    timeout = setTimeout(tick, 1000);
+  }, 1000);
 
-    timeout = setTimeout(tick, 5000);
-  }, 2500);
-
-  function shuffleArray(array) {
+  function shuffleArray(array: string[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -63,3 +80,12 @@
   console.info("%c follow us on instagram @studio.artsandcrafts <3", style);
   console.info("%c github: https://github.com/studioartsandcrafts", style);
 </script>
+<style lang="postcss" is:global>
+  #funny-caption span {
+    @apply opacity-0;
+  }
+  #funny-caption span.active {
+    @apply opacity-100;
+
+  }
+</style>
